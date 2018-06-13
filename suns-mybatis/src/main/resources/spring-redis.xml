@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 连接池的配置信息 -->
+	<bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<!-- 最大分配的对象数 -->
+		<property name="maxTotal" value="${redis.pool.maxTotal}" />
+		<!-- 最大能够保持idel状态的对象数 -->
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<!-- 最小能够保持idel状态的对象数 -->
+		<property name="minIdle" value="${redis.pool.minIdle}" />
+		<!-- 当池内没有返回对象时，最大等待时间 -->
+		<property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}" />
+		<!-- 当调用borrow Object方法时，是否进行有效性检查 -->
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+		<!-- 当调用return Object方法时，是否进行有效性检查 -->
+		<property name="testOnReturn" value="${redis.pool.testOnReturn}" />
+	</bean>
+
+	<bean id="jedisClusterFactory" class="com.sbatis2.cache.JedisFactory">
+		<constructor-arg name="openRedis" value="${redis.openRedis}" /> <!-- 是否使用redis缓存 默认不试用 -->
+		<constructor-arg name="poolConfig" ref="genericObjectPoolConfig" />
+		<constructor-arg name="host" value="${redis.host}" />
+		<constructor-arg name="port" value="${redis.port}" />
+		<constructor-arg name="timeout" value="${redis.timeout}" />
+		<constructor-arg name="password">
+			<null />
+		</constructor-arg>
+		<constructor-arg name="database" value="${redis.db}" />
+	</bean>
+</beans>

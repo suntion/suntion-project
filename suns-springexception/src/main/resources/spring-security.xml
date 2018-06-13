@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+    
+
+	<!-- 不过滤资源 -->
+	<security:http pattern="/resources/**" security="none" />
+
+
+    <!-- 不过滤的请求地址 -->      
+    <security:http pattern="/login.jsp" security="none" />
+    <security:http pattern="/test/**" security="none" />
+	
+	
+	<!-- 资源所需要的权限 -->
+	<security:http use-expressions="true" auto-config="true">
+		<security:intercept-url pattern="/index.jsp" access="hasRole('ROLE_SERVICE')" />
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+		
+		<security:form-login login-page="/login.jsp" authentication-failure-url="/login.jsp" default-target-url="/index.jsp"/>
+	</security:http>
+	
+	
+	<!-- 配置用户和相应的权限 -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="admin" password="admin" authorities="ROLE_ADMIN" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>

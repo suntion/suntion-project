@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- define logger file path --> -->
+	<property name="LOG_HOME" value="/tmp/logs" />
+	<property name="APPLICATION_NAME" value="suns-shiro" />
+
+    <!-- console logger -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%d{HH:mm:ss}]- %-5level - %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+    <!-- everyday create logger file -->
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${APPLICATION_NAME}/${APPLICATION_NAME}.%d{yyyy-MM-dd}.log</FileNamePattern>   
+            <MaxHistory>100</MaxHistory>
+		</rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] - %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+	</appender>
+
+    
+    <logger name="com.suns.shiro" level="debug" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
+
+	<root level="INFO">
+		<appender-ref ref="console" />
+		<appender-ref ref="rollingFile" />
+	</root>
+</configuration>
