@@ -279,10 +279,10 @@ public final class EncryptDecryptUtil {
 
 		// Map<String, String> keyPairMapKeyi = initRSAKey(2048);
 		// Map<String, String> keyPairMapYuhai = initRSAKey(2048);
-		Map<String, String> keyPairMapMine = new HashMap<>();
+		Map<String, String> keyPairMapMine = new HashMap<String, String>();
 		keyPairMapMine.put("publicKey", publicKeyKeyi);
 		keyPairMapMine.put("privateKey", privateKeyKeyi);
-		Map<String, String> keyPairMapThirdParty = new HashMap<>();
+		Map<String, String> keyPairMapThirdParty = new HashMap<String, String>();
 		keyPairMapThirdParty.put("publicKey", publicKeyYuhai);
 		keyPairMapThirdParty.put("privateKey", privateKeyYuhai);
 

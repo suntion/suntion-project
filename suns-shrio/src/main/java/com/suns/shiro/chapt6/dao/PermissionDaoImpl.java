@@ -25,7 +25,6 @@ public class PermissionDaoImpl implements PermissionDao {
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement psst = connection.prepareStatement(sql,  new String[] { "id" });
                 psst.setString(1, permission.getPermission());
