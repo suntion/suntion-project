@@ -1,0 +1,9 @@
+server:
+  servlet:
+    context-path: /suns-springboot
+    
+spring:
+  application:
+    name: suns-springboot
+  profiles:
+    active: dev
