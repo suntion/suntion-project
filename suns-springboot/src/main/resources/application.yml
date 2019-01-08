@@ -1,9 +1,57 @@
 server:
   servlet:
-    context-path: /suns-springboot
-    
+    context-path: /
 spring:
-  application:
-    name: suns-springboot
+  mvc:
+    static-path-pattern: /**
+  resources: 
+    static-locations:
+    - classpath:/static/
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html; charset=utf-8
+    prefix: classpath:/templates/
+    suffix: .html
   profiles:
-    active: dev
+    active:
+    - dev
+  redis:
+    timeout: 5000
+    jedis:
+      pool:
+        max-idle: 200
+        min-idle: 200
+        max-active: 2000
+        max-wait: 1000
+  datasource:
+    url: jdbc:mysql://${spring.datasource.data-url}?useSSL=false&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    type: com.alibaba.druid.pool.DruidDataSource
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org: null
+      quartz:
+        scheduler:
+          instanceName: suntion_clusteredScheduler
+          instanceId: AUTO
+          skipUpdateCheck: true
+        jobStore:
+          class: org.quartz.impl.jdbcjobstore.JobStoreTX
+          driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+          tablePrefix: QRTZ_
+          isClustered: true
+          clusterCheckinInterval: 10000
+          useProperties: false
+          misfireThreshold: 5000
+          txIsolationLevelSerializable: false
+        threadPool:
+          class: org.quartz.simpl.SimpleThreadPool
+          threadCount: 50
+          threadPriority: 5
+          threadsInheritContextClassLoaderOfInitializingThread: true
+mybatis-plus:
+  mapper-locations:
+  - classpath*:/mapper/**/*Mapper.xml
+  type-aliases-package: suntion.auth.model

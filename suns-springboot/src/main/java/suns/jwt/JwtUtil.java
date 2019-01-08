@@ -1,4 +1,4 @@
-package com.suns.springboot;
+package suns.jwt;
 
 import java.util.Date;
 import java.util.HashMap;

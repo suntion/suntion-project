@@ -1,2 +1,17 @@
 server:
-  port: 8888
+  port: 80
+logging: 
+  level:
+    suntion: debug
+spring: 
+  datasource: 
+    data-url: sontion.cn:3306/build-dev
+    username: root
+    password: root
+  redis:
+    database: 0
+    host: sontion.cn
+    password: rootabc,123
+    port: 6379
+  thymeleaf:
+    cache: false

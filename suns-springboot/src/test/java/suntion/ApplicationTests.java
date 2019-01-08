@@ -1,4 +1,4 @@
-package com.suns.springboot;
+package suntion;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
