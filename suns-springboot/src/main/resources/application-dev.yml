@@ -5,12 +5,12 @@ logging:
     suntion: debug
 spring: 
   datasource: 
-    data-url: sontion.cn:3306/build-dev
+    data-url: suntion.cc:3306/auth-dev
     username: root
-    password: root
+    password: rootabc,123
   redis:
     database: 0
-    host: sontion.cn
+    host: suntion.cc
     password: rootabc,123
     port: 6379
   thymeleaf:
